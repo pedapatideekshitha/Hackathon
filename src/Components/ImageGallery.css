@@ -1,24 +1,20 @@
+.carousel-image {
+  width: 90%;
+  image-resolution: 1080p;
+  margin: 0;
+  padding-left: 50px;
+  height: 120%;
+  object-fit: cover;
+}
 
-  .carousel-image {
-    width:80%;
-    image-resolution: 1080p;
-    margin: 0;
-    padding-left: 30px;
-    padding-bottom: 30px;
+.carousel-dots {
+  bottom: 10px;
+}
 
-    height: 120%; /* Maintains aspect ratio */
-    object-fit: cover; /* Ensures images cover the container without distortion */
-  }
-  
-  .carousel-dots {
-    bottom: 10px; /* Position dots at the bottom of the carousel */
-  }
-  
-  .carousel-dot {
-    background-color: #ff4081; /* Dot color */
-  }
-  
-  .carousel-dot-active {
-    background-color: #4a90e2; /* Active dot color */
-  }
-  
+.carousel-dot {
+  background-color: #ff4081;
+}
+
+.carousel-dot-active {
+  background-color: #4a90e2;
+}

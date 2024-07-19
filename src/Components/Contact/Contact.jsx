@@ -12,9 +12,7 @@ const Contact = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Contact Us</h1>
-          <p className="text-lg text-gray-800">
-            We’d love to hear from you!
-          </p>
+          <p className="text-lg text-gray-800">We’d love to hear from you!</p>
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-center bg-white p-8 rounded-lg shadow-lg">
@@ -24,7 +22,6 @@ const Contact = () => {
               className="space-y-6 border border-gray-300 p-6 rounded-md shadow-sm"
             >
               <div className="mb-4">
-                
                 <input
                   type="text"
                   id="name"
@@ -36,7 +33,6 @@ const Contact = () => {
               </div>
 
               <div className="mb-4">
-                
                 <input
                   type="email"
                   id="email"
@@ -48,7 +44,6 @@ const Contact = () => {
               </div>
 
               <div className="mb-4">
-                
                 <textarea
                   id="feedback"
                   name="feedback"

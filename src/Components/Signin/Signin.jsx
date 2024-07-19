@@ -1,10 +1,46 @@
-
-import React from "react";
-import validate from './Signin'
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import cookies from "js-cookies";
+import NewNav from "../NewNav";
 export default function Login({ onSignupClick }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formdata = {
+      email: email,
+      password: password,
+    };
+    console.log(formdata);
+    axios({
+      url: "http://172.17.15.183:3000/User/login",
+      method: "post",
+      data: formdata,
+    })
+      .then((res) => {
+        // console.log(res.data)
+        if (res.data.message === "Login Successfull") {
+          console.log(res.data.Token);
+          cookies.setItem("token", res.data.Token);
+          navigate("/newnav");
+        } else {
+          alert("Enter Valid Details");
+        }
+      })
+      .catch((err) => alert("Enter Valid Details"));
+  };
+
   return (
     <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <form className="space-y-9" action="#" method="POST">
+      <form
+        className="space-y-9"
+        action="#"
+        method="POST"
+        onSubmit={handleSubmit}
+      >
         <h5 className="text-xl font-medium text-gray-900 dark:text-white">
           Sign in to your account
         </h5>
@@ -20,8 +56,8 @@ export default function Login({ onSignupClick }) {
             aria-required="true"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
             required
-
           />
         </div>
         <div>
@@ -36,6 +72,7 @@ export default function Login({ onSignupClick }) {
             aria-required="true"
             placeholder="Enter your password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
@@ -43,6 +80,7 @@ export default function Login({ onSignupClick }) {
         <button
           type="submit"
           className="w-full text-black bg-gray-500 hover:bg-gray-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          onClick={<NewNav />}
         >
           Sign In
         </button>
@@ -50,7 +88,6 @@ export default function Login({ onSignupClick }) {
           Don’t have an account?{" "}
           <button
             onClick={onSignupClick}
-            onSubmit={validate}
             className="text-blue-700 hover:underline hover:text-red-700 dark:text-blue-500"
           >
             Create an account
@@ -60,4 +97,3 @@ export default function Login({ onSignupClick }) {
     </div>
   );
 }
-

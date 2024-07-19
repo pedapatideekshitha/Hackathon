@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function Signup({ onSigninClick }) {
+  const [Fname, setFname] = useState("");
+  const [Lname, setLname] = useState("");
+  const [aadhar, setAadhar] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [Phno, setPhno] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleSubmit = (e) => {
+    const formdata = {
+      Fname: Fname,
+      Lname: Lname,
+      aadhar: aadhar,
+      state: state,
+      city: city,
+      pincode: pincode,
+      Phno: Phno,
+      email: email,
+      password: password,
+    };
+    console.log(formdata);
     e.preventDefault();
+    axios({
+      url: "http://172.17.15.183:3000/User/insert",
+      method: "post",
+      data: formdata,
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
     alert("Form submitted successfully!");
   };
 
@@ -30,7 +60,9 @@ export default function Signup({ onSigninClick }) {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="First Name"
               required
+              onChange={(e) => console.log(setFname(e.target.value))}
             />
+            {console.log(document.getElementById("Fname"))}
           </div>
           <div>
             <label htmlFor="last_name" className="sr-only">
@@ -42,6 +74,7 @@ export default function Signup({ onSigninClick }) {
               id="Lname"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Last Name"
+              onChange={(e) => setLname(e.target.value)}
               required
             />
           </div>
@@ -56,6 +89,7 @@ export default function Signup({ onSigninClick }) {
             id="aadhar"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             placeholder="Aadhar No."
+            onChange={(e) => setAadhar(e.target.value)}
             required
           />
         </div>
@@ -71,6 +105,7 @@ export default function Signup({ onSigninClick }) {
               id="state"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="State"
+              onChange={(e) => setState(e.target.value)}
               required
             />
           </div>
@@ -84,6 +119,7 @@ export default function Signup({ onSigninClick }) {
               id="city"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="District"
+              onChange={(e) => setCity(e.target.value)}
               required
             />
           </div>
@@ -100,6 +136,9 @@ export default function Signup({ onSigninClick }) {
               id="pincode"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Pincode"
+              onChange={(e) => {
+                setPincode(e.target.value);
+              }}
               required
             />
           </div>
@@ -113,6 +152,7 @@ export default function Signup({ onSigninClick }) {
               id="Phno"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Phone Number"
+              onChange={(e) => setPhno(e.target.value)}
               required
             />
           </div>
@@ -127,6 +167,7 @@ export default function Signup({ onSigninClick }) {
             id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             placeholder="Email Address"
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -140,6 +181,7 @@ export default function Signup({ onSigninClick }) {
             id="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black-500 focus:border-black-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
